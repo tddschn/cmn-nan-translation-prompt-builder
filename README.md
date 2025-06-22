@@ -25,6 +25,9 @@ See screenshots and [#Example](#example) for a demonstration of how it works.
 https://gg.teddysc.me/?g=6c0d06999d1a05c0f425d122a2643ca6&a&c=4
 
 ![CleanShot-2025-06-22-13.35.35_base64.png](https://g.teddysc.me/tddschn/6c0d06999d1a05c0f425d122a2643ca6/CleanShot-2025-06-22-13.35.35_base64.png?b)
+
+This command builds [this prompt](https://gist.github.com/tddschn/596c2b4f9243cd115578c2bfbd831524)
+
 ![CleanShot-2025-06-22-13.33.51_base64.png](https://g.teddysc.me/tddschn/6c0d06999d1a05c0f425d122a2643ca6/CleanShot-2025-06-22-13.33.51_base64.png?b)
 
 The translation has many mistakes as discussed below.
@@ -97,7 +100,9 @@ Several [倒裝詞](http://www.shenpo.com.tw/reverse) are used in this example.
 pak_penn_to_hokkien_split_and_sutian_prompt_builder.py '你家後面有颱風經過 今天有客人要來一起吃午飯 很熱鬧 他們已經習慣了 他們說口渴想喝芭樂汁'
 ```
 
-**Partial Markdown Output (sent to `stdout`):**
+**Markdown Output (sent to `stdout`):**
+
+This command builds [this prompt](https://gist.github.com/tddschn/596c2b4f9243cd115578c2bfbd831524)
 
 <details>
   <summary>Click to expand!</summary>
