@@ -3,6 +3,7 @@
 # requires-python = ">=3.11"
 # dependencies = [
 #     "jieba", "loguru", "selectolax", "pyhtml2md",
+# "opencc",
 # ]
 # ///
 import argparse
@@ -36,35 +37,59 @@ DEFAULT_LLM_PROMPT = '\n---\n### LLM INSTRUCTION\n\nBased on the original text a
 # --- Main Logic Functions ---
 
 
-def segment_text(text: str) -> list[str]:
+def segment_text(
+    text: str, mode: str, tw_to_cn_converter, cn_to_tw_converter
+) -> list[str]:
     """
-    Segments the input text using jieba, performs Part-of-Speech tagging,
-    and filters out undesirable word types (like interjections).
+    Converts text to Simplified Chinese for better segmentation, performs
+    segmentation, converts words back to Traditional, and filters.
 
     Args:
-        text: The input string.
+        text: The input string in Traditional Chinese.
+        mode: The segmentation mode ('accurate', 'full', 'search').
+        tw_to_cn_converter: OpenCC instance for TW -> CN conversion.
+        cn_to_tw_converter: OpenCC instance for CN -> TW conversion.
 
     Returns:
         A list of unique, valid words to be queried.
     """
-    logger.info("Segmenting input text and filtering parts of speech...")
-    # Using posseg.cut to get words with their POS tags
-    words_with_flags = pseg.cut(text)
-    filtered_words = []
+    logger.info(f"Using '{mode}' segmentation mode.")
+    logger.info("Converting input to Simplified Chinese for jieba processing...")
+    simplified_text = tw_to_cn_converter.convert(text)
+    words_to_query = []
     dropped_words = []
-    for word, flag in words_with_flags:
-        # We only care about words, not punctuation or whitespace
-        word = word.strip()
-        if not word:
-            continue
-        if flag in POS_TO_DROP:
-            dropped_words.append(f"{word} ({flag})")
-        else:
-            filtered_words.append(word)
+    if mode == "accurate":
+        logger.info("Performing segmentation with POS tagging...")
+        words_with_flags_cn = pseg.cut(simplified_text)
+        for word_cn, flag in words_with_flags_cn:
+            word_cn = word_cn.strip()
+            if not word_cn:
+                continue
+            # Convert back to Traditional Chinese for the final list
+            word_tw = cn_to_tw_converter.convert(word_cn)
+            if flag in POS_TO_DROP:
+                dropped_words.append(f"{word_tw} ({flag})")
+            else:
+                words_to_query.append(word_tw)
+    else:
+        # Full and Search modes do not support POS tagging.
+        logger.warning(
+            f"POS-based filtering (for interjections) is not supported in '{mode}' mode. All parts will be queried."
+        )
+        if mode == "full":
+            segmented_words_cn = jieba.cut(simplified_text, cut_all=True)
+        elif mode == "search":
+            segmented_words_cn = jieba.cut_for_search(simplified_text)
+        for word_cn in segmented_words_cn:
+            word_cn = word_cn.strip()
+            if not word_cn:
+                continue
+            # Convert back to Traditional Chinese
+            words_to_query.append(cn_to_tw_converter.convert(word_cn))
     # Return unique words while preserving order of first appearance
     seen = set()
     unique_filtered_words = [
-        x for x in filtered_words if not (x in seen or seen.add(x))
+        x for x in words_to_query if not (x in seen or seen.add(x))
     ]
     logger.info(
         f"Kept {len(unique_filtered_words)} unique words for lookup: {', '.join(unique_filtered_words)}"
@@ -226,7 +251,7 @@ def extract_and_convert_html(
 def main():
     """Main execution function."""
     parser = argparse.ArgumentParser(
-        description="A pre-processor for Pak-pîng Dialect to Hokkien translation. Reads text, looks up words in a dictionary, and generates a Markdown document for an LLM.",
+        description="A pre-processor for Beijing Dialect to Hokkien translation. Reads text, looks up words in a dictionary, and generates a Markdown document for an LLM.",
         formatter_class=argparse.RawTextHelpFormatter,
     )
     input_group = parser.add_mutually_exclusive_group()
@@ -241,6 +266,12 @@ def main():
         "--file",
         type=pathlib.Path,
         help="Path to a file containing the input text to process.",
+    )
+    parser.add_argument(
+        "--split-mode",
+        choices=["accurate", "full", "search"],
+        default="accurate",
+        help="The word segmentation mode to use (default: accurate).",
     )
     parser.add_argument(
         "--prompt",
@@ -273,8 +304,16 @@ def main():
         )
         parser.print_help()
         sys.exit(1)
+    # Initialize OpenCC converters
+    logger.info("Initializing OpenCC converters...")
+    import opencc
+
+    tw_to_cn_converter = opencc.OpenCC("tw2s.json")
+    cn_to_tw_converter = opencc.OpenCC("s2twp.json")
     # 2. Segment text and filter words
-    query_words = segment_text(input_text)
+    query_words = segment_text(
+        input_text, args.split_mode, tw_to_cn_converter, cn_to_tw_converter
+    )
     if not query_words:
         logger.warning("No valid words to query after segmentation. Exiting.")
         sys.exit(0)
