@@ -193,6 +193,7 @@ Feeding the generated Markdown prompt into a capable LLM (I'm using the free Gem
 This project would not be possible without the excellent work of the following open-source projects and data sources:
 
 *   **[教育部臺灣閩南語常用詞辭典 (Sutian)](https://sutian.moe.edu.tw/)**: For providing an invaluable, high-quality, and openly accessible dictionary for Hokkien.
+*   ithuan / 意傳科技's Hokkien TTS.
 *   **[OpenCC (Open Chinese Convert)](https://github.com/BYVoid/OpenCC)**: For the robust and accurate library that makes the crucial Traditional-Simplified-Traditional conversion workflow possible.
 *   **[Jieba](https://github.com/fxsjy/jieba)**: For the powerful and fast Chinese segmentation engine that forms the core of the text processing pipeline.
 
