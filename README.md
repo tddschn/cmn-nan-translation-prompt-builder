@@ -165,7 +165,7 @@ Feeding the generated Markdown prompt into a capable LLM (I'm using the free Gem
 > **Hokkien (Romanization):** Lín tau āu-piah ū hong-thai king-kuè. Kin-á-ji̍t ū lâng-kheh beh lâi tsò-hué tsia̍h-tiong-tàu, tsin lāu-jia̍t, in í-king si̍p-kuàn--ah. In kóng tshuì-ta siūnn-beh lim pá-á-tsiap.
 
 - The LLM output is mostly fine, but `guest` should be `人客`, it got that wrong . The tool is not good if you don't already know Hokkien.
-- Sutian has an entry for `[習慣]`(https://sutian.moe.edu.tw/zh-hant/tshiau/?lui=tai_su&tsha=%E7%BF%92%E6%85%A3), but no one I know irl or online ever uses it, but LLM doesn't know that so it made another mistake. `慣習` is the correct one.
+- Sutian has an entry for [`習慣`](https://sutian.moe.edu.tw/zh-hant/tshiau/?lui=tai_su&tsha=%E7%BF%92%E6%85%A3), but no one I know irl or online ever uses it, but LLM doesn't know that so it made another mistake. `慣習` is the correct one.
 - `lunch` -> [`中晝`](https://sutian.moe.edu.tw/zh-hant/su/713/#) surprised me, and I think it would surprise a lot of people. [晝](https://sutian.moe.edu.tw/zh-hant/tshiau/?lui=tai_su&tsha=%E6%99%9D) is the arcaic character / word for `day time` (when the sun is above you).
 - [ithuan / 意傳科技's Hokkien TTS for this sentence](https://suisiann.ithuan.tw/%E8%AC%9B/%E6%81%81%E5%85%9C%E5%BE%8C%E5%A3%81%E6%9C%89%E9%A2%A8%E9%A2%B1%E7%B6%93%E9%81%8E%E3%80%82%E4%BB%8A%E4%BB%94%E6%97%A5%E6%9C%89%E4%BA%BA%E5%AE%A2%E6%AC%B2%E4%BE%86%E5%81%9A%E4%BC%99%E9%A3%9F%E4%B8%AD%E6%99%9D%EF%BC%8C%E7%9C%9F%E9%AC%A7%E7%86%B1%EF%BC%8C%F0%AA%9C%B6%E5%B7%B2%E7%B6%93%E7%BF%92%E6%85%A3%E7%9F%A3%E3%80%82%F0%AA%9C%B6%E8%AC%9B%E5%96%99%E7%84%A6%E6%83%B3%E6%AC%B2%E5%95%89%E8%8F%9D%E4%BB%94%E6%B1%81%E3%80%82)
 
