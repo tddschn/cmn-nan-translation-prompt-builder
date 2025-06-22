@@ -4,6 +4,8 @@ https://github.com/tddschn/cmn-nan-translation-prompt-builder
 
 This is a tool for building a detailed prompt to aid a Large Language Model (LLM) in translating Mandarin Chinese (cmn, 北平方言) to Hokkien (nan, 閩南語, Bân-lâm-gí). The core function is to take a Mandarin sentence and enrich it with dictionary definitions, creating an informative context for the translation (翻譯器, huan-i̍k-khì) task.
 
+See [#Example](#example) for a demonstration of how it works.
+
 - [北平方言到閩南語翻譯器 Prompt Builder (cmn-nan-translation-prompt-builder)](#北平方言到閩南語翻譯器-prompt-builder-cmn-nan-translation-prompt-builder)
   - [Purpose](#purpose)
   - [What It Is](#what-it-is)
