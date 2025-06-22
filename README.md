@@ -43,6 +43,8 @@ Help native / heritage speakers learn the writing of Hokkien.
 
 Currently LLM will give 台灣優勢腔之音標, which may not be the same as the the dialect you speak, and this will likely confuse learners who are not exposed to different dialects of Hokkien.
 
+[The words used for the same thing can vary by regions too](https://everylittled.com/article/136815)
+
 LLMs with adequate written Hokkien knowledge are still very rare and not accessiable for the general public, this tool builds a prompt that help LLMs learn enough from the prompt to translate the sentence at hand with good enough quality. The Sutian's examples also help the LLM to choose between 文讀 or 白讀 if it needs to.
 
 ## What It Is
