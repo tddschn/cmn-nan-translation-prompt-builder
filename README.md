@@ -26,6 +26,9 @@ https://gg.teddysc.me/?g=6c0d06999d1a05c0f425d122a2643ca6&a&c=4
 
 ![CleanShot-2025-06-22-13.35.35_base64.png](https://g.teddysc.me/tddschn/6c0d06999d1a05c0f425d122a2643ca6/CleanShot-2025-06-22-13.35.35_base64.png?b)
 ![CleanShot-2025-06-22-13.33.51_base64.png](https://g.teddysc.me/tddschn/6c0d06999d1a05c0f425d122a2643ca6/CleanShot-2025-06-22-13.33.51_base64.png?b)
+
+The translation has many mistakes as discussed below.
+
 ![CleanShot-2025-06-22-13.33.27_base64.png](https://g.teddysc.me/tddschn/6c0d06999d1a05c0f425d122a2643ca6/CleanShot-2025-06-22-13.33.27_base64.png?b)
 ![CleanShot-2025-06-22-13.34.11_base64.png](https://g.teddysc.me/tddschn/6c0d06999d1a05c0f425d122a2643ca6/CleanShot-2025-06-22-13.34.11_base64.png?b)
 
