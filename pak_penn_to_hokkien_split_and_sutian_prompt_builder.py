@@ -268,16 +268,24 @@ def main():
         help="Path to a file containing the input text to process.",
     )
     parser.add_argument(
+        "-S",
         "--split-mode",
         choices=["accurate", "full", "search"],
         default="accurate",
-        help="The word segmentation mode to use (default: accurate).",
+        help="The word segmentation mode to use for jieba library (default: accurate).",
     )
     parser.add_argument(
+        "-p",
         "--prompt",
         type=str,
         default=DEFAULT_LLM_PROMPT,
         help="A custom prompt to append at the end of the generated Markdown file.",
+    )
+    parser.add_argument(
+        "-o",
+        "--out",
+        type=pathlib.Path,
+        help="Output file path. If not specified, outputs to stdout.",
     )
     args = parser.parse_args()
     # 1. Determine and read input text
@@ -397,10 +405,22 @@ def main():
     # Add the final LLM prompt
     if args.prompt:
         output_parts.append(args.prompt.strip())
-    # Print the final combined Markdown to stdout
+    # Output the final combined Markdown
     final_markdown = "\n".join(output_parts)
-    print(final_markdown)
-    logger.info("Successfully generated and outputted the final Markdown document.")
+
+    if args.out:
+        logger.info(f"Writing output to file: {args.out}")
+        try:
+            args.out.write_text(final_markdown, encoding="utf-8")
+            logger.info(
+                f"Successfully wrote the final Markdown document to file at {args.out} ."
+            )
+        except Exception as e:
+            logger.error(f"Error writing to output file {args.out}: {e}")
+            sys.exit(1)
+    else:
+        print(final_markdown)
+        logger.info("Successfully generated and outputted the final Markdown document.")
 
 
 if __name__ == "__main__":
